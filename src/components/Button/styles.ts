@@ -1,4 +1,4 @@
-import styled from "styled-components/native";
+import styled, { css } from "styled-components/native";
 import { DefaultTheme } from "styled-components";
 import { TouchableOpacity } from "react-native";
 
@@ -23,7 +23,9 @@ export const Container = styled(TouchableOpacity)<Props>`
 `;
 
 export const Title = styled.Text`
-  font-size: ${({ theme }: ThemeProps) => theme.FONT_SIZE.MD}px;
-  font-family: ${({ theme }: ThemeProps) => theme.FONT_FAMILY.BOLD};
-  color: ${({ theme }: ThemeProps) => theme.COLORS.WHITE};
+  ${({ theme }: ThemeProps) => css`
+    font-size: ${theme.FONT_SIZE.MD}px;
+    font-family: ${theme.FONT_FAMILY.BOLD};
+    color: ${theme.COLORS.WHITE};
+  `}
 `;
