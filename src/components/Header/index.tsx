@@ -8,10 +8,14 @@ type Props = {
 export function Header({ showBackButton = false }: Props) {
   const navigation = useNavigation();
 
+  function handleGoBack() {
+    navigation.navigate('groups');
+  }
+
   return (
     <Container>
       {showBackButton && (
-        <BackButton onPress={() => navigation.goBack()}>
+        <BackButton onPress={handleGoBack}>
           <BackIcon />
         </BackButton>
       )}
