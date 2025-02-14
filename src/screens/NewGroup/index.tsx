@@ -7,6 +7,7 @@ import { useNavigation } from "@react-navigation/native";
 import { useState } from "react";
 import { groupCreate } from "@/src/storage/group/groupCreate";
 import { Alert } from "react-native";
+import { AppError } from "@/src/utils/AppError";
 
 export function NewGroup() {
   const navigation = useNavigation();
@@ -14,15 +15,22 @@ export function NewGroup() {
 
   async function handleNewGroup() {
     try {
+      if(group.trim().length === 0) {
+        return Alert.alert('Novo grupo', 'Informe o nome da turma.');
+      }
+      
       await groupCreate(group);
       navigation.navigate('players', { group });
+      
     } catch (error) {
-      if (error instanceof Error) {
+      if (error instanceof AppError) {
+        Alert.alert('Não foi possível criar o grupo', error.message);
+      } else {
         Alert.alert('Não foi possível criar o grupo');
       }
     }
   }
-
+  
   return (
     <Container>
       <Header showBackButton />
